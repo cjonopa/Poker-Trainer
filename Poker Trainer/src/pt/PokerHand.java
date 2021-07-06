@@ -137,7 +137,7 @@ public class PokerHand {
 	//return the rank of the highest card not being used 
 	public int nextKicker() {
 		for (int i = 14; i >= 2; i--) {
-			if (i != topRank && i != bottomRank && Arrays.asList(kicker).contains(i)) {
+			if (i != topRank && i != bottomRank && handRanks[i] > 0) {
 				return i;
 			}
 		}

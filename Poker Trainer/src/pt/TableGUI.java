@@ -44,23 +44,20 @@ public class TableGUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Hand currentHand = new Hand();
+				//Deal my Cards
 				Card card1 = currentHand.getMyHoleCards()[0];
 				Card card2 = currentHand.getMyHoleCards()[1];
 				
-				Image img = new ImageIcon(this.getClass().getResource("/"+card1.toString()+".png")).getImage();
-				Image img2 = new ImageIcon(this.getClass().getResource("/"+card2.toString()+".png")).getImage();
-				lblMyHand.setIcon(new ImageIcon(img));
-				lblMyHand2.setIcon(new ImageIcon(img2));
+				displayCard(card1, lblMyHand);
+				displayCard(card2, lblMyHand2);
 				
 				//Deal Opponent Cards
 				Card opcard1 = currentHand.getOpponentHoleCards()[0];
 				Card opcard2 = currentHand.getOpponentHoleCards()[1];
 				
-				Image opimg = new ImageIcon(this.getClass().getResource("/"+opcard1.toString()+".png")).getImage();
-				Image opimg2 = new ImageIcon(this.getClass().getResource("/"+opcard2.toString()+".png")).getImage();
-				lblOpHand.setIcon(new ImageIcon(opimg));
-				lblOpHand2.setIcon(new ImageIcon(opimg2));
-				
+				displayCard(opcard1, lblOpHand);
+				displayCard(opcard2, lblOpHand2);
+
 				//Deal Board Cards
 				Card bc1 = currentHand.getFlop()[0];
 				Card bc2 = currentHand.getFlop()[1];
@@ -68,16 +65,11 @@ public class TableGUI extends JFrame {
 				Card bc4 = currentHand.getTurn();
 				Card bc5 = currentHand.getRiver();
 				
-				Image bcimg1 = new ImageIcon(this.getClass().getResource("/"+bc1.toString()+".png")).getImage();
-				Image bcimg2 = new ImageIcon(this.getClass().getResource("/"+bc2.toString()+".png")).getImage();
-				Image bcimg3 = new ImageIcon(this.getClass().getResource("/"+bc3.toString()+".png")).getImage();
-				Image bcimg4 = new ImageIcon(this.getClass().getResource("/"+bc4.toString()+".png")).getImage();
-				Image bcimg5 = new ImageIcon(this.getClass().getResource("/"+bc5.toString()+".png")).getImage();
-				lblBoard1.setIcon(new ImageIcon(bcimg1));
-				lblBoard2.setIcon(new ImageIcon(bcimg2));
-				lblBoard3.setIcon(new ImageIcon(bcimg3));
-				lblBoard4.setIcon(new ImageIcon(bcimg4));
-				lblBoard5.setIcon(new ImageIcon(bcimg5));
+				displayCard(bc1, lblBoard1);
+				displayCard(bc2, lblBoard2);
+				displayCard(bc3, lblBoard3);
+				displayCard(bc4, lblBoard4);
+				displayCard(bc5, lblBoard5);
 				
 				PokerHand myHand = new PokerHand(card1, card2, bc1, bc2, bc3, bc4, bc5);
 				PokerHand opHand = new PokerHand(opcard1, opcard2, bc1, bc2, bc3, bc4, bc5);
@@ -95,6 +87,8 @@ public class TableGUI extends JFrame {
 
 			}
 		});
+		
+		
 		btnDeal.setBounds(100, 500, 68, 23);
 		frame.getContentPane().add(btnDeal);
 		
@@ -155,5 +149,12 @@ public class TableGUI extends JFrame {
 		lblWinner.setBounds(80, 80, 120, 40);
 		frame.getContentPane().add(lblWinner);
 		frame.setVisible(true);
+	}
+	
+	//Set the image 
+	private void displayCard(Card c, JLabel lbl) {
+		Image cardImage = new ImageIcon(this.getClass().getResource("/"+c.toString()+".png")).getImage();
+		lbl.setIcon(new ImageIcon(cardImage));
+
 	}
 }
